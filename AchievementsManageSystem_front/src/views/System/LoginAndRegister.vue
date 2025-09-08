@@ -1,29 +1,29 @@
 <template>
   <div class="base">
-    <!-- 注册登录界面 -->
+    <!-- Registration and Login Interface -->
     <div class="loginAndRegist">
-      <!--登录表单-->
+      <!-- Login Form -->
       <div class="loginArea">
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!-- 标语 -->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Slogan -->
           <div v-show="isShow" class="title">
             LOGIN
           </div>
         </transition>
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!--登录框-->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Login Box -->
           <div v-show="isShow" class="pwdArea">
             <div style="flex: 1;justify-content: center;align-items: center">
               <el-form :model="formData" label-width="auto" label-position="top"
-                       style="margin-left: 22%;margin-right:30% ">
-                <el-form-item label="用户名" style="margin-bottom: 0;margin-top: 6%">
+                style="margin-left: 22%;margin-right:30% ">
+                <el-form-item label="Username" style="margin-bottom: 0;margin-top: 6%">
                   <el-input v-model="formData.username" placeholder="Input your UserID" clearable></el-input>
                 </el-form-item>
-                <el-form-item label="密码" style="margin-bottom: 0">
+                <el-form-item label="Password" style="margin-bottom: 0">
                   <el-input v-model="formData.password" placeholder="Input your password" show-password type="password"
-                            clearable></el-input>
+                    clearable></el-input>
                 </el-form-item>
 
 
@@ -33,105 +33,106 @@
           </div>
         </transition>
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!-- 登录按钮 -->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Login Button -->
           <div v-show="isShow" class="btnArea">
             <el-button type="success" round
-                       style="width: 100px;margin-left: 25%;background-color:rgba(97,116,131,0.22);border: 1px solid #ccc8c8;letter-spacing: 2px"
-                       @click="login">Login
+              style="width: 100px;margin-left: 25%;background-color:rgba(97,116,131,0.22);border: 1px solid #ccc8c8;letter-spacing: 2px"
+              @click="login">Login
             </el-button>
           </div>
         </transition>
       </div>
 
 
-      <!-- 注册表单 -->
+      <!-- Registration Form -->
       <div class="registArea">
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!--  注册表头-->
-          <div v-show="!isShow" class="rigestTitle" >
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Registration Header -->
+          <div v-show="!isShow" class="rigestTitle">
             REGISTER
           </div>
         </transition>
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!--            注册表单-->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Registration Form Content -->
           <div v-show="!isShow" class="registForm">
-            <el-form :model="ruleForm" :rules="rules" ref="checkForm" status-icon  label-width="auto" >
+            <el-form :model="ruleForm" :rules="rules" ref="checkForm" status-icon label-width="auto">
               <el-form-item label="UserID" style="margin-bottom: 17px;margin-top: 3%" prop="username">
                 <el-input v-model="ruleForm.username" placeholder="Input your UserID" clearable></el-input>
               </el-form-item>
-              <el-form-item   label="Password" style="margin-bottom: 10px;margin-top: 0" prop="password">
-                <el-input show-password type="password" placeholder="Input your Password" v-model="ruleForm.password" autocomplete="off"></el-input>
+              <el-form-item label="Password" style="margin-bottom: 10px;margin-top: 0" prop="password">
+                <el-input show-password type="password" placeholder="Input your Password" v-model="ruleForm.password"
+                  autocomplete="off"></el-input>
               </el-form-item>
               <div class="demo-progress" style="margin-left:25%;height: 15px;margin-top: 13px">
-                <el-progress striped striped-flow :duration="8"  style="width: 240px;"  :percentage="progressLength" :format="format" :color="getColor" />
+                <el-progress striped striped-flow :duration="8" style="width: 240px;" :percentage="progressLength"
+                  :format="format" :color="getColor" />
               </div>
               <el-form-item label="Confirm Password" style="margin-bottom: 17px;margin-top: 3px" prop="checkPass">
-                <el-input show-password type="password" placeholder="Input the same password" v-model="ruleForm.checkPass"
-                          autocomplete="off" maxlength="12"></el-input>
+                <el-input show-password type="password" placeholder="Input the same password"
+                  v-model="ruleForm.checkPass" autocomplete="off" maxlength="12"></el-input>
               </el-form-item>
             </el-form>
           </div>
         </transition>
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!--            注册按钮-->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Registration Button -->
           <div v-show="!isShow" class="registBtn">
             <el-button type="success" round
-                       style="width: 100px;margin-left:37%;background-color: rgba(97,116,131,0.22);border: 1px solid #ccc8c8;letter-spacing: 2px"
-                       @click="register">Signup
+              style="width: 100px;margin-left:37%;background-color: rgba(97,116,131,0.22);border: 1px solid #ccc8c8;letter-spacing: 2px"
+              @click="register">Signup
             </el-button>
             <el-button type="success" round
-                       style="background-color: rgba(97,116,131,0.22);width: 100px;border: 1px solid #ccc8c8;letter-spacing: 2px"
-                       @click="reSetForm">Reset info
+              style="background-color: rgba(97,116,131,0.22);width: 100px;border: 1px solid #ccc8c8;letter-spacing: 2px"
+              @click="reSetForm">Reset info
             </el-button>
           </div>
         </transition>
       </div>
-      <!-- 信息展示界面 -->
+      <!-- Information Display Interface -->
       <div id="aaa" class="showInfo" :style="{
-                borderTopRightRadius: styleObj.bordertoprightradius,
-                borderBottomRightRadius: styleObj.borderbottomrightradius,
-                borderTopLeftRadius: styleObj.bordertopleftradius,
-                borderBottomLeftRadius: styleObj.borderbottomleftradius,
-                right: styleObj.rightDis
-            }" ref="showInfoView">
+        borderTopRightRadius: styleObj.bordertoprightradius,
+        borderBottomRightRadius: styleObj.borderbottomrightradius,
+        borderTopLeftRadius: styleObj.bordertopleftradius,
+        borderBottomLeftRadius: styleObj.borderbottomleftradius,
+        right: styleObj.rightDis
+      }" ref="showInfoView">
 
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!-- 没有用户输入用户名或者找不到用户名的时候 -->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- When no username is entered or username not found -->
           <div v-show="isShow"
-               style="display: flex;flex-direction: column;align-items: center;justify-content: center;width: 100%;height: 100%">
-            <!-- 欢迎语 -->
+            style="display: flex;flex-direction: column;align-items: center;justify-content: center;width: 100%;height: 100%">
+            <!-- Welcome Message -->
             <div
-                style="flex: 2;display: flex;align-items: center;font-size: 22px;color:  rgba(97, 116, 131, 0.97);font-weight: bold">
+              style="flex: 2;display: flex;align-items: center;font-size: 22px;color:  rgba(97, 116, 131, 0.97);font-weight: bold">
               ParkingHelper
             </div>
-            <!-- 欢迎图片 -->
+            <!-- Welcome Image -->
             <div style="flex: 2">
               <el-button type="success" style="background-color: rgba(97,116,131,0.66);border: 1px solid #ccc8c8;" round
-                         @click="changeToRegiest">Haven't account yet? Click to signup
+                @click="changeToRegiest">Haven't account yet? Click to signup
               </el-button>
             </div>
           </div>
         </transition>
-        <!-- 用户输入用户名时展示头像以及姓名 -->
+        <!-- Show avatar and name when username is entered -->
         <transition name="animate__animated animate__bounce" enter-active-class="animate__fadeInUp"
-                    leave-active-class="animate__zoomOut" appear>
-          <!-- 用户注册的时候展示信息 -->
+          leave-active-class="animate__zoomOut" appear>
+          <!-- Show information when user is registering -->
           <div v-show="!isShow"
-               style="display: flex;flex-direction: column;align-items: center;justify-content: center;width: 100%;height: 100%">
-            <!-- 欢迎语 -->
-            <div
-                style="flex: 2;display: flex;align-items: center;font-size: 22px;color: #FFFFFF;font-weight: bold">
-              欢迎注册
+            style="display: flex;flex-direction: column;align-items: center;justify-content: center;width: 100%;height: 100%">
+            <!-- Welcome message -->
+            <div style="flex: 2;display: flex;align-items: center;font-size: 22px;color: #FFFFFF;font-weight: bold">
+              Welcome to Register
             </div>
-            <!-- 欢迎图片 -->
+            <!-- Welcome image -->
             <div style="flex: 2">
               <el-button type="success" style="background-color:rgba(97,116,131,0.66);border: 1px solid #ccc8c8;" round
-                         @click="changeToLogin">Have account already？Click to login
+                @click="changeToLogin">Have account already? Click to login
               </el-button>
             </div>
           </div>
@@ -143,12 +144,12 @@
 </template>
 
 <script setup>
-import {reactive, ref, watch} from "vue";
+import { reactive, ref, watch } from "vue";
 import api from "../../api/index.js";
-import {ElMessage, ElNotification} from "element-plus";
-import {useRouter} from "vue-router";
-import {useStore} from "vuex";
-const store=useStore();
+import { ElMessage, ElNotification } from "element-plus";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+const store = useStore();
 const router = useRouter()
 const formData = reactive({
   username: "",
@@ -156,30 +157,30 @@ const formData = reactive({
 })
 
 const login = () => {
-  //如果为管理员 =>header部分显示 成果信息后台管理系统
+  // If admin => header displays parking management system
   api.post("/login", formData).then(res => {
-    console.log("登陆之后后端返回的数据是 ", res.data);
+    console.log("Login response data: ", res.data);
     if (res.data.flag === true) {
-      //登陆成功  计数 +1
-      store.commit("inittabList")//登录成功之后 初始化面包屑 和tag标签
-      //存入token
+      // Login successful count +1
+      store.commit("inittabList")// After successful login, initialize breadcrumb and tag labels
+      // Store token
       let tokenValue = res.data.data.tokenValue;
       let tokenName = res.data.data.tokenName;
-      let username  = res.data.data.loginId;
-      //存入角色
+      let username = res.data.data.loginId;
+      // Store role
       if (tokenValue && tokenName) {
         let role = res.data.message;
-        sessionStorage.setItem('saToken', tokenValue); //会话存储里面
+        sessionStorage.setItem('saToken', tokenValue); // Session storage
         sessionStorage.setItem('tokenName', tokenName);
         sessionStorage.setItem('role', role);
         sessionStorage.setItem('username', username);
         ElMessage({
-          message: '登录成功,欢迎回来! ' + formData.username,
+          message: 'Login successful, welcome back! ' + formData.username,
           type: 'success',
         })
 
 
-          router.push("/")
+        router.push("/")
 
 
       }
@@ -218,68 +219,67 @@ const changeToLogin = () => {
   isShow.value = !isShow.value
 }
 
-const checkForm = ref(null) //ref对象
-//自定义校验规则  校验两次输入的密码\
-//校验输入的密码
+const checkForm = ref(null) // ref object
+// Custom validation rules for password confirmation
+// Validate password input
 
-
-const rules = reactive({//校验规则
-  username: [{required: true, message: '用户名为学号', trigger: 'blur'}, {
-    //长度为6
+const rules = reactive({ // Validation rules
+  username: [{ required: true, message: 'Username is required', trigger: 'blur' }, {
+    // Length should be 3-10
     min: 3,
     max: 10,
-    message: '用户名为学号 长度为6',
+    message: 'Username length should be 3-10 characters',
     trigger: 'blur'
   }],
 
-  password :[{ required: true, message: '密码', trigger: 'blur' }
-    ,{
-    //长度为6
+  password: [{ required: true, message: 'Password is required', trigger: 'blur' }
+    , {
+    // Length should be 2-10
     min: 2,
     max: 10,
-    message: '密码为',
+    message: 'Password length should be 2-10 characters',
     trigger: 'blur'
   }
   ],
-  checkPass:[{required: true, message: '确认密码', trigger: 'blur' },{
-    //长度为6
+  checkPass: [{ required: true, message: 'Confirm password is required', trigger: 'blur' }, {
+    // Length should be 3-10
     min: 3,
     max: 10,
-    message: '确认密码为',
+    message: 'Confirm password length should be 3-10 characters',
     trigger: 'blur'
   }],
 
 })
-const ruleForm=reactive({
-  username:"",
+const ruleForm = reactive({
+  username: "",
   password: '',
 })
-const progressLength=ref(0)
-//进度条
-//监听对象数据
-watch(()=>ruleForm.password,(newValue,oldValue)=>{
-  progressLength.value=newValue.length*10;
+const progressLength = ref(0)
+// Progress bar
+// Watch object data
+watch(() => ruleForm.password, (newValue, oldValue) => {
+  progressLength.value = newValue.length * 10;
 })
-const format=(percentage)=> {
-  if (percentage <=30) {
+const format = (percentage) => {
+  if (percentage <= 30) {
     return 'Password strength: Weak';
-  } else if (percentage>30&&percentage<=60 ) {
+  } else if (percentage > 30 && percentage <= 60) {
     return 'Password strength: Medium';
   }
-  else  if(percentage>60&&percentage<=80){
+  else if (percentage > 60 && percentage <= 80) {
     return 'Password strength: Strong';
   }
-  else{
-    return"Password strength: Strong"
+  else {
+    return "Password strength: Strong"
   }
 }
-const getColor=(percentage)=>{
-  if (percentage <=30) {
+const getColor = (percentage) => {
+  if (percentage <= 30) {
     return '#f56c6c';
-  } else if (percentage<=60 &&percentage>30) {
+  } else if (percentage <= 60 && percentage > 30) {
     return '#e6a23c';
   }
-  else  if(percentage>60&&percentage<80){
+  else if (percentage > 60 && percentage < 80) {
     return '#1989fa';
   }
   else {
@@ -288,21 +288,21 @@ const getColor=(percentage)=>{
 
 }
 
-//用户注册
-const register=()=>{
+//User registration
+const register = () => {
   console.log(ruleForm.area);
-  //比较两个密码
-  if(ruleForm.password!==ruleForm.checkPass){
+  //Compare two passwords
+  if (ruleForm.password !== ruleForm.checkPass) {
     ElMessage({
       type: 'warning',
-      message: 'Passwords do not match（',
+      message: 'Passwords do not match',
     })
     return;
   }
   checkForm.value.validate((valid) => {
-    if(valid){
-      api.post("/register" , ruleForm).then(res => {
-        console.log("编辑之后的 res is ",res);
+    if (valid) {
+      api.post("/register", ruleForm).then(res => {
+        console.log("After edit res is ", res);
         if (res.data.flag === true) {
           ElMessage({
             type: 'success',
@@ -316,7 +316,7 @@ const register=()=>{
         }
       })
     }
-    else{
+    else {
       ElMessage({
         type: 'warning',
         message: 'Please check if the form fields are valid',
@@ -324,20 +324,20 @@ const register=()=>{
     }
   })
 }
-const reSetForm=()=>{
-  ruleForm.username="";
-  ruleForm.password= ''
-  ruleForm.role= "学生"
-  ruleForm.name=""
-  ruleForm.major=''
-  ruleForm.checkPass= ''
-  ruleForm.status=1
-  ruleForm.area=""
+const reSetForm = () => {
+  ruleForm.username = "";
+  ruleForm.password = ''
+  ruleForm.role = "Student"
+  ruleForm.name = ""
+  ruleForm.major = ''
+  ruleForm.checkPass = ''
+  ruleForm.status = 1
+  ruleForm.area = ""
 }
-//找回密码
-const findPwd=()=>{
-  router.push({name:'passwordRecovery'})
-  //跳转到找回密码的页面
+// Password recovery
+const findPwd = () => {
+  router.push({ name: 'passwordRecovery' })
+  // Navigate to password recovery page
 }
 </script>
 
@@ -353,7 +353,7 @@ const findPwd=()=>{
 }
 
 .loginAndRegist {
-  border: #e9fcff solid ;
+  border: #e9fcff solid;
   border-radius: 50px;
   position: relative;
   display: flex;
@@ -406,6 +406,7 @@ const findPwd=()=>{
   background-size: 100%;
   background-position: -80px -70px;
 }
+
 .title {
   width: 70%;
   flex: 1;
@@ -452,7 +453,7 @@ const findPwd=()=>{
   flex: 1;
   width: 100%;
   display: flex;
-  /*justify-content: space-around; !*水平居中*!*/
+  /*justify-content: space-around; !*horizontal center*!*/
 }
 
 .rigestTitle {
@@ -475,6 +476,7 @@ const findPwd=()=>{
   color: rgba(97, 116, 131, 0.97);
   font-size: 16px;
 }
+
 .registBtn {
   width: 100%;
   flex: 1;

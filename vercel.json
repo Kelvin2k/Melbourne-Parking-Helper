@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "AchievementsManageSystem_front/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/AchievementsManageSystem_front/$1"
+    }
+  ],
+  "buildCommand": "cd AchievementsManageSystem_front && npm run build",
+  "outputDirectory": "AchievementsManageSystem_front/dist",
+  "installCommand": "cd AchievementsManageSystem_front && npm install"
+}

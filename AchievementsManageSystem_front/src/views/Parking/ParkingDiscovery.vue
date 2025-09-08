@@ -4,31 +4,29 @@
       <el-card class="search-card" v-loading="loading">
         <template #header>
           <div class="card-header">
-            <h3>停车场搜索</h3>
+            <h3>Parking Search</h3>
           </div>
         </template>
         <div class="search-form">
           <el-form :model="searchForm" label-width="100px" label-position="top" class="responsive-form">
-            <el-form-item label="目的地">
-              <el-input
-                id="destination-input"
-                v-model="searchForm.destination"
-                placeholder="输入目的地（例如: Geelong Central）"
-                clearable
-                @keyup.enter.native="handleSearch">
+            <el-form-item label="Destination">
+              <el-input id="destination-input" v-model="searchForm.destination"
+                placeholder="Enter destination (e.g.: Geelong Central)" clearable @keyup.enter.native="handleSearch">
                 <template #prefix>
-                  <el-icon><Location /></el-icon>
+                  <el-icon>
+                    <Location />
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
             <el-form-item>
               <div class="button-group">
-                <el-button type="primary" @click="handleSearch">搜索</el-button>
-                <el-button @click="resetForm">重置</el-button>
+                <el-button type="primary" @click="handleSearch">Search</el-button>
+                <el-button @click="resetForm">Reset</el-button>
               </div>
             </el-form-item>
           </el-form>
-          <div class="hint">数据来源：Geelong Data Exchange（LoRa 传感器实时状态）</div>
+          <div class="hint">Data Source: Geelong Data Exchange (LoRa Sensor Real-time Status)</div>
         </div>
       </el-card>
     </div>
@@ -38,13 +36,15 @@
         <template #header>
           <div class="card-header">
             <h3>搜索结果</h3>
-            <div v-if="centerPoint" class="center-info">中心点：{{ centerPoint.lat.toFixed(5) }}, {{ centerPoint.lng.toFixed(5) }}（半径 {{ (radius/1000).toFixed(1) }} km）</div>
+            <div v-if="centerPoint" class="center-info">中心点：{{ centerPoint.lat.toFixed(5) }}, {{
+              centerPoint.lng.toFixed(5) }}（半径 {{ (radius / 1000).toFixed(1) }} km）</div>
           </div>
         </template>
 
-        <el-empty v-if="!loading && searchResults.length===0" description="暂无数据，请输入目的地并搜索" />
+        <el-empty v-if="!loading && searchResults.length === 0" description="暂无数据，请输入目的地并搜索" />
 
-        <el-table v-else :data="searchResults" style="width: 100%" border stripe :max-height="tableMaxHeight" class="responsive-table">
+        <el-table v-else :data="searchResults" style="width: 100%" border stripe :max-height="tableMaxHeight"
+          class="responsive-table">
           <el-table-column prop="name" label="名称" min-width="180" />
           <el-table-column prop="distanceText" label="距离" min-width="100" />
           <el-table-column prop="availableText" label="可用车位" min-width="110" />
@@ -191,7 +191,7 @@ const handleSearch = async () => {
           available,
           availableText: available === null ? '未知' : (available ? '1（空闲）' : '0（占用）'),
           distance: dist,
-          distanceText: dist < 1000 ? `${Math.round(dist)} m` : `${(dist/1000).toFixed(2)} km`,
+          distanceText: dist < 1000 ? `${Math.round(dist)} m` : `${(dist / 1000).toFixed(2)} km`,
           updateTime: f.metadata_time || '-',
           mapUrl
         }
@@ -260,8 +260,8 @@ function haversine(lat1, lon1, lat2, lon2) {
   const R = 6371000
   const dLat = toRad(lat2 - lat1)
   const dLon = toRad(lon2 - lon1)
-  const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon/2)**2
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
   return R * c
 }
 
@@ -319,19 +319,74 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-.parking-discovery { padding: 20px; }
-.search-section { margin-bottom: 20px; }
-.search-card, .result-card { width: 100%; margin-bottom: 20px; }
-.card-header { display: flex; justify-content: space-between; align-items: center; }
-.center-info { color: #909399; font-size: 13px; }
-.hint { color: #909399; font-size: 12px; margin-top: 8px; }
-.button-group { display: flex; gap: 10px; }
-.detail-container { padding: 20px; }
-.detail-info { margin-bottom: 20px; }
-.info-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 10px; }
-.map-container { height: 360px; border: 1px solid #ebeef5; border-radius: 4px; }
-.leaflet-map { height: 100%; width: 100%; }
-.map-placeholder { height: 100%; display: flex; justify-content: center; align-items: center; }
+.parking-discovery {
+  padding: 20px;
+}
+
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-card,
+.result-card {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.center-info {
+  color: #909399;
+  font-size: 13px;
+}
+
+.hint {
+  color: #909399;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-container {
+  padding: 20px;
+}
+
+.detail-info {
+  margin-bottom: 20px;
+}
+
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.map-container {
+  height: 360px;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+}
+
+.leaflet-map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Google Places 自动完成样式修复 */
 :global(.pac-container) {
@@ -370,19 +425,52 @@ onBeforeUnmount(() => {
 
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
-  .parking-discovery { padding: 15px; }
-  .responsive-form :deep(.el-form-item__label) { padding: 0 0 8px; }
-  .button-group { width: 100%; justify-content: space-between; }
-  .button-group .el-button { flex: 1; }
-  .detail-container { padding: 15px; }
-  .info-row { flex-direction: column; gap: 5px; }
-  .map-container { height: 300px; }
+  .parking-discovery {
+    padding: 15px;
+  }
+
+  .responsive-form :deep(.el-form-item__label) {
+    padding: 0 0 8px;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .button-group .el-button {
+    flex: 1;
+  }
+
+  .detail-container {
+    padding: 15px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-  .parking-discovery { padding: 10px; }
-  .responsive-table :deep(.el-table__header) { font-size: 14px; }
-  .responsive-table :deep(.el-table__body) { font-size: 13px; }
-  .map-container { height: 240px; }
+  .parking-discovery {
+    padding: 10px;
+  }
+
+  .responsive-table :deep(.el-table__header) {
+    font-size: 14px;
+  }
+
+  .responsive-table :deep(.el-table__body) {
+    font-size: 13px;
+  }
+
+  .map-container {
+    height: 240px;
+  }
 }
 </style>
