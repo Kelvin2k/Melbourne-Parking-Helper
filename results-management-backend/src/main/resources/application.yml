@@ -1,0 +1,63 @@
+server:
+  port: 8011
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/parkinghelper?serverTimezone=UTC
+      username: root
+      password: zac123456
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+
+  mail:
+    host: smtp.qq.com
+    username: 2789347466@qq.com
+    password: jguahjxoofhydfaj
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: false
+            required: false
+        debug: true
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+sa-token:
+  token-name: satoken
+  timeout: 21600
+  active-timeout: -1
+  is-concurrent: true
+
+# Alibaba Cloud OSS Configuration
+# Set these environment variables before running the application:
+# export ALIBABA_ACCESS_KEY_ID="your_access_key_id"
+# export ALIBABA_ACCESS_KEY_SECRET="your_access_key_secret"
+alibaba:
+  oss:
+    endpoint: http://oss-cn-chengdu.aliyuncs.com
+    bucket-name: xsp-datastore
+    domain: https://xspfile.yougi.top/
+  is-share: true
+  token-style: uuid
+  is-log: true
