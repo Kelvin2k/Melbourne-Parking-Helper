@@ -5,21 +5,24 @@
 Before running the application, you need to set the following environment variables for Alibaba Cloud OSS integration:
 
 ### macOS/Linux:
+
 ```bash
-export ALIBABA_ACCESS_KEY_ID="your_actual_access_key_id"
-export ALIBABA_ACCESS_KEY_SECRET="your_actual_access_key_secret"
+export ACCESS_KEY_ID="your_actual_access_key_id"
+export ACCESS_KEY_SECRET="your_actual_access_key_secret"
 ```
 
 ### Windows Command Prompt:
+
 ```cmd
-set ALIBABA_ACCESS_KEY_ID=your_actual_access_key_id
-set ALIBABA_ACCESS_KEY_SECRET=your_actual_access_key_secret
+set ACCESS_KEY_ID=your_actual_access_key_id
+set ACCESS_KEY_SECRET=your_actual_access_key_secret
 ```
 
 ### Windows PowerShell:
+
 ```powershell
-$env:ALIBABA_ACCESS_KEY_ID="your_actual_access_key_id"
-$env:ALIBABA_ACCESS_KEY_SECRET="your_actual_access_key_secret"
+$env:ACCESS_KEY_ID="your_actual_access_key_id"
+$env:ACCESS_KEY_SECRET="your_actual_access_key_secret"
 ```
 
 ## How to Get Alibaba Cloud Credentials

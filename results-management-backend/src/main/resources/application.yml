@@ -49,10 +49,10 @@ sa-token:
   active-timeout: -1
   is-concurrent: true
 
-# Alibaba Cloud OSS Configuration
+# Cloud OSS Configuration
 # Set these environment variables before running the application:
-# export ALIBABA_ACCESS_KEY_ID="your_access_key_id"
-# export ALIBABA_ACCESS_KEY_SECRET="your_access_key_secret"
+# export ACCESS_KEY_ID="your_access_key_id"
+# export ACCESS_KEY_SECRET="your_access_key_secret"
 alibaba:
   oss:
     endpoint: http://oss-cn-chengdu.aliyuncs.com

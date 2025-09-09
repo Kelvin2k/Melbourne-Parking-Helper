@@ -45,8 +45,8 @@ This project can be deployed to Vercel for the frontend component.
 
 ### Environment Variables Needed
 
-- `ALIBABA_ACCESS_KEY_ID`: Your Alibaba Cloud access key
-- `ALIBABA_ACCESS_KEY_SECRET`: Your Alibaba Cloud secret key
+- `ACCESS_KEY_ID`: Your Alibaba Cloud access key
+- `ACCESS_KEY_SECRET`: Your Alibaba Cloud secret key
 - Database connection string for production
 
 ### API Configuration
