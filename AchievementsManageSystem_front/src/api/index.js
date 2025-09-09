@@ -1,35 +1,40 @@
-import axios from 'axios'
-import router from "../router/index.js"; //js文件中 直接使用实例
-import {ElMessage} from "element-plus";
-//为什么不能使用const router=useRouter()  因为useRouter只能在
+import axios from "axios";
+import router from "../router/index.js"; // Directly use the router instance in JS files
+import { ElMessage } from "element-plus";
+// Why can't we use const router = useRouter()? Because useRouter can only be used inside Vue components
 const api = axios.create({
-    baseURL: "http://localhost:8011",
-    timeout: 5000 // 5秒钟
-})
-// 添加请求拦截器
-//// 在请求发送之前做一些处理，例如添加请求头等
-api.interceptors.request.use(config => {
-    const token = sessionStorage.getItem('saToken');
-    config.headers.set(sessionStorage.getItem('tokenName'), sessionStorage.getItem('saToken'))
-    return config;
+  baseURL: import.meta.env.VITE_API_BASE_URL,
+  timeout: 5000, // 5 seconds
 });
-//响应拦截器设置
-api.interceptors.response.use(response => {
-      // console.log("前端响应拦截器 拦截到的后端数据是的response is ",response.data);
-        if (response.data.message==='登录已经过期,请重新登录') {
-            //清除satoken 为什么要清除呢 因为路由导航那里有限制
-            sessionStorage.removeItem('saToken'); //会话存储里面
-            sessionStorage.removeItem('tokenName');
-            sessionStorage.removeItem('role');
-            ElMessage('登录已经过期,请重新登录')
-            router.push('/loginandregister') //回到登录页面
-            return response
-        } else {//如果已经登录了 那么就放行  将后端数据交给前端 所以 一定要return response
-           return response;
-        }
-    },
-    error => {
-        console.log("error",response.data.code)
-    },
-)
-export default api
+// Add request interceptor
+// Do some processing before sending the request, such as adding request headers
+api.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("saToken");
+  config.headers.set(
+    sessionStorage.getItem("tokenName"),
+    sessionStorage.getItem("saToken")
+  );
+  return config;
+});
+// Set up response interceptor
+api.interceptors.response.use(
+  (response) => {
+    // console.log("Frontend response interceptor, intercepted backend data: ", response.data);
+    if (response.data.message === "Login has expired, please log in again") {
+      // Remove saToken. Why? Because there are restrictions in route navigation
+      sessionStorage.removeItem("saToken"); // Remove from session storage
+      sessionStorage.removeItem("tokenName");
+      sessionStorage.removeItem("role");
+      ElMessage("Login has expired, please log in again");
+      router.push("/loginandregister"); // Redirect to login page
+      return response;
+    } else {
+      // If already logged in, allow and pass backend data to frontend. Must return response.
+      return response;
+    }
+  },
+  (error) => {
+    console.log("error", response.data.code);
+  }
+);
+export default api;
